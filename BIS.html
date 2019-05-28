@@ -24,6 +24,7 @@ function startTime() {
   var m = today.getMinutes();
   var s = today.getSeconds();
   h = checkhours(h);
+  var t = trafficinfo(h);
   m = checkTime(m);
   s = checkTime(s);
   document.getElementById('txt').innerHTML =
@@ -43,6 +44,15 @@ function checkhours(i){
 	{
 		return i;
 	}
+}
+function trafficinfo(h){
+ if(h>=8 && h<=10)||(h>=4 && h<=6)
+	{
+	return "heavy Traffic";
+	}
+else {
+return "light traffic";
+}
 }
 
 </script>
