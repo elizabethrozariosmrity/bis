@@ -1,0 +1,334 @@
+<?php
+$servername = "localhost";
+$username = "root";
+$password = " ";
+$dbname = "bus_information_system";
+
+// Create connection
+$db = mysqli_connect('localhost', 'root', '', 'bus_inoformation_system');
+// Check connection
+
+$query1 = mysqli_query($db, "SELECT * FROM eastside");
+$query2 = mysqli_query($db, "SELECT * FROM greatnorthern" );
+$query3 = mysqli_query($db, "SELECT * FROM korahroad" );
+$query4 = mysqli_query($db, "SELECT * FROM saultcollege" );
+$query5 = mysqli_query($db, "SELECT * FROM rm" );
+$query6 = mysqli_query($db, "SELECT * FROM northstreet" );
+$last = mysqli_query($db, "SELECT * FROM ss" );
+
+?>
+<script>
+function startTime() {
+  var today = new Date();
+  var h = today.getHours();
+  var m = today.getMinutes();
+  var s = today.getSeconds();
+  h = checkhours(h);
+  m = checkTime(m);
+  s = checkTime(s);
+  document.getElementById('txt').innerHTML =
+  h + ":" + m + ":" + s;
+  var t = setTimeout(startTime, 500);
+}
+function checkTime(i) {
+  if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+  return i;
+}
+function checkhours(i){
+	if(i > 12){
+		i = i % 12; 
+		return i;
+	}
+	else
+	{
+		return i;
+	}
+}
+
+</script>
+
+<!DOCTYPE html>
+<html>
+<head>
+
+<fieldset>
+<legend><img src="child_at_bus_stop.png" alt="IT Service Centre"></legend>
+</fieldset>
+<style>
+
+<!-- body {
+  background-color: white;
+}
+ -->
+h1 {
+  color: Blue;
+  text-align: center;
+  width: 100%;
+}
+
+p {
+  font-family: verdana;
+  font-size: 20px;
+}
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even){background-color: #f2f2f2}
+
+th {
+  background-color: #CEF6F5;
+  color: black;
+}
+ .tt-hint,
+  .city {
+     border: 2px solid #CCCCCC;
+     border-radius: 8px 8px 8px 8px;
+     font-size: 24px;
+     height: 45px;
+     line-height: 30px;
+     outline: medium none;
+     padding: 8px 12px;
+     width: 400px;
+        }
+		
+.tt-dropdown-menu{
+	width: 400px;
+	margin-top: 5px;
+	padding: 8px 12px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 8px 8px 8px 8px;
+    font-size: 18px;
+    color: #111;
+    background-color: #F1F1F1;
+}
+</style>
+</head>
+<body onload="startTime()">
+
+<div id="txt"></div>
+
+<h1> <button onclick="Home"> Home</button >  </h1>
+ 
+<h1>
+<fieldset>
+
+
+<button <select> <option value="Eastside">EastSide</option> 
+<option value ="gnr"> Great Norhtern Road </option>
+</select>
+</button>
+<button onclick="myFunction()">Select Destination</button>
+
+<button type="ns">North Street</button>
+
+<button type="ss">Steeltol/SecondLine</button>
+</fieldset>
+
+</h1>
+<div id="eastside">
+<h1> EastSide</h1>
+<fieldset>
+<table width=100% border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td>Departs Terminal </td>
+<td>Churchill Plaza Outbound </td>
+<td>Dacey & Trunk</td>
+<td>Churchill Plaza Inbound</td>
+<td>Queen & Brock </td>
+<td>Arrives Terminal </td>
+</tr>
+
+<?php while($row=mysqli_fetch_array($query1)):?>
+<tr>
+<td> <?php echo $row['departs_terminal'];?></td>
+<td> <?php echo $row['churchillplaza_out'];?></td>
+<td> <?php echo $row['dacey_trunk'];?></td>
+<td> <?php echo $row['churchillplaza_in'];?></td>
+<td> <?php echo $row['queen_brock'];?></td>
+<td> <?php echo $row['arrives_terminal'];?></td>
+</tr>
+<?php endwhile;?>
+
+</table>
+</fieldset>
+
+</div>
+<h1> Great Northern Road</h1>
+<fieldset>
+<table width=100% border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td>Departs Terminal </td>
+<td>Bay & East St. </td>
+<td> Pim & Bruce St. </td>
+<td>Walmart Great Northern </td>
+<td>Sault Area Hospital </td>
+<td>Grand Gardens North </td>
+<td>Drive In Road Layover </td>
+<td>Great Norhtern & Northern Ave. </td>
+<td>Pim & Wellington </td>
+<td>Queen and Brock </td>
+<td>Arrives Terminal </td>
+</tr>
+
+<?php while($row=mysqli_fetch_array($query2)):?>
+<tr>
+<td> <?php echo $row['departs_terminal'];?></td>
+<td> <?php echo $row['bay_east'];?></td>
+<td> <?php echo $row['pim_bruce'];?></td>
+<td> <?php echo $row['walmart'];?></td>
+<td> <?php echo $row['ssa'];?></td>
+<td> <?php echo $row['ggn'];?></td>
+<td> <?php echo $row['layover'];?></td>
+<td> <?php echo $row['gn_na'];?></td>
+<td> <?php echo $row['pim_wellington'];?></td>
+<td> <?php echo $row['queen_brock'];?></td>
+<td> <?php echo $row['arrives_terminal'];?></td>
+</tr>
+<?php endwhile;?>
+
+</table>
+</fieldset>
+
+<h1> Korah Road</h1>
+<fieldset>
+<table width=100% border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td>Departs Terminal </td>
+<td>2nd Line W. & Peoples Rd </td>
+<td>Cemetery 4th Line </td>
+<td>Lyons Ave. & Patrick St. </td>
+<td>Arrives Terminal </td>
+</tr>
+<?php while($row=mysqli_fetch_array($query3)):?>
+<tr>
+<td> <?php echo $row['departs_terminal'];?></td>
+<td> <?php echo $row['2lw_peoples'];?></td>
+<td> <?php echo $row['cemetery'];?></td>
+<td> <?php echo $row['lyons'];?></td>
+<td> <?php echo $row['arrives_terminal'];?></td>
+</tr>
+<?php endwhile;?>
+</table>
+</fieldset>
+
+<h1> Sault College</h1>
+<fieldset>
+<table width=100% border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td>Departs Terminal </td>
+<td>Sault College Outbound </td>
+<td>Algoma University </td>
+<td>Sault College Inbound </td>
+<td>Arrives Terminal </td>
+</tr>
+
+<?php while($row=mysqli_fetch_array($query4)):?>
+<tr>
+<td> <?php echo $row['departs_terminal'];?></td>
+<td> <?php echo $row['sc_out'];?></td>
+<td> <?php echo $row['au'];?></td>
+<td> <?php echo $row['sc_in'];?></td>
+<td> <?php echo $row['arrives_terminal'];?></td>
+</tr>
+<?php endwhile;?>
+
+</table>
+</fieldset>
+
+<h1> Riverside/McNab</h1>
+<fieldset>
+<table width=100% border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td>Departs Terminal </td>
+<td>Algoma U Outbound </td>
+<td>Esso on Frontenac </td>
+<td>Group Health Centre McNabb @ Willow </td>
+<td>Sault Area Hospital</td>
+<td>YMCA McNabb @Willow </td>
+<td>Husky </td>
+<td>Algoma U Inbound </td>
+<td>Arrives Terminal </td>
+</tr>
+<?php while($row=mysqli_fetch_array($query5)):?>
+<tr>
+<td> <?php echo $row['departs_terminal'];?></td>
+<td> <?php echo $row['au_out'];?></td>
+<td> <?php echo $row['esso'];?></td>
+<td> <?php echo $row['ghcm'];?></td>
+<td> <?php echo $row['ssa'];?></td>
+<td> <?php echo $row['ymca'];?></td>
+<td> <?php echo $row['husky'];?></td>
+<td> <?php echo $row['au_in'];?></td>
+<td> <?php echo $row['arrives_terminal'];?></td>
+</tr>
+<?php endwhile;?>
+</table>
+</fieldset>
+
+<h1> North Street</h1>
+<fieldset>
+<table width=100% border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td>Departs Terminal </td>
+<td>North St & Northern Ave </td>
+<td>Second Line & Sackville </td>
+<td>Metro </td>
+<td>Arrives Terminal</td>
+</tr>
+<?php while($row=mysqli_fetch_array($query6)):?>
+<tr>
+<td> <?php echo $row['departs_terminal'];?></td>
+<td> <?php echo $row['nsna'];?></td>
+<td> <?php echo $row['2l_ville'];?></td>
+<td> <?php echo $row['metro'];?></td>
+<td> <?php echo $row['arrives_terminal'];?></td>
+</tr>
+<?php endwhile;?>
+</table>
+</fieldset>
+
+<h1> Steeltol/SecondLine</h1>
+<fieldset>
+<table width=100% border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td>Departs Terminal </td>
+<td>Douglas & Korah Rd. </td>
+<td>Nixon Rd.</td>
+<td>Walmart Outbound </td>
+<td>Sault Area Hospital </td>
+<td>Goulais Ave. & 2nd Line W. </td>
+<td>Nixon Rd Inbound </td>
+<td>Conmee Ave. & John St.</td>
+<td>Arrives Terminal Terminal </td>
+</tr>
+<?php while($row=mysqli_fetch_array($last)):?>
+<tr>
+<td> <?php echo $row['departs_terminal'];?></td>
+<td> <?php echo $row['dk'];?></td>
+<td> <?php echo $row['n_out'];?></td>
+<td> <?php echo $row['walmart'];?></td>
+<td> <?php echo $row['ssa'];?></td>
+<td> <?php echo $row['g22l'];?></td>
+<td> <?php echo $row['n_in'];?></td>
+<td> <?php echo $row['cajs'];?></td>
+<td> <?php echo $row['arrives_terminal'];?></td>
+</tr>
+<?php endwhile;?>
+</table>
+</fieldset>
+
+<?php while($row=mysqli_fetch_array($traveltime)):?>
+<?php endwhile;?>
+
+
+</body>
+</html>
