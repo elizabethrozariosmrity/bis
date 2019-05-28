@@ -18,4 +18,4 @@ steps:
     echo See https://aka.ms/yaml
   displayName: 'Run a multi-line script'
   
- -[![Build Status](https://dev.azure.com/erozario/erozario/_apis/build/status/elizabethrozariosmrity.bis?branchName=master)](https://dev.azure.com/erozario/erozario/_build/latest?definitionId=1&branchName=master)
+ 
