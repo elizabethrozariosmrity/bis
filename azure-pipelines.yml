@@ -1,21 +1,27 @@
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
 
-trigger:
-- master
+variables:
+  serviceConnectionToAzure: elizabethrozariosmrity.bis
+  appName: elizabethrozariosmrity.bis
+- task : CopyFiles@2
+   displayName: CopyFiles
+   inputs:
+   SourceFolder: $(system.defaultworkingdirectory)
+   Contents: '**'
+   TargetFolder: $(build.artifactstagingdirectory)
 
-pool:
-  vmImage: 'ubuntu-latest'
+- task: PublishBuildArtifacts@1
+   displayName: Publish Artifact
+   inputs:
+     PathPublish: $(build.artifactstagingdirectory)
 
-steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+- task: AzureWebApp@1
+  displayName: Azure Web App Deploy
+  inputs:
+  azureSubscription: $(serviceConnectionTpAzure)
+  appType: webAppLinux
+  appName: $(TrafficInfo)
+  package: $(build.artifactstagingdirectory)/**/*.war
+  
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
  
  
