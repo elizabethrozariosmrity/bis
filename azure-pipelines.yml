@@ -1,27 +1,17 @@
 
-variables:
-  serviceConnectionToAzure: elizabethrozariosmrity.bis
-   appName: TrafficInfo
- - task : CopyFiles@2
-   displayName: CopyFiles
-   inputs:
-   SourceFolder: $(system.defaultworkingdirectory)
-   Contents: '**'
-    TargetFolder: $(build.artifactstagingdirectory)
 
- - task: PublishBuildArtifacts@1
-   displayName: Publish Artifact
-   inputs:
-     PathPublish: $(build.artifactstagingdirectory)
+- task: AzureRmWebAppDeployment@4
+  inputs:
+    ConnectionType: 'AzureRM'
+    azureSubscription: 'Free Trial (1380ee78-d935-4343-b661-cf37f3ab5c78)'
+    appType: 'webApp'
+    WebAppName: 
+    VirtualApplication: 'Traffic Information System'
+    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
 
-- task: AzureWebApp@1
-    displayName: Azure Web App Deploy
-    inputs:
-     azureSubscription: $(serviceConnectionTpAzure)
-     appType: webAppLinux
-     appName: $(TrafficInfo)
-     package: $(build.artifactstagingdirectory)/**/*.war
-
-
- 
- 
+- task: AppCenterTest@1
+  inputs:
+    artifactsDirectory: '$(Build.ArtifactStagingDirectory)/AppCenterTest'
+    frameworkOption: 'appium'
+    credentialsOption: 'serviceEndpoint'
+    localeOption: 'en_US'
