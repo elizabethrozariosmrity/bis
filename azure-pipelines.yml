@@ -1,27 +1,27 @@
 
 variables:
   serviceConnectionToAzure: elizabethrozariosmrity.bis
-  appName: elizabethrozariosmrity.bis
-- task : CopyFiles@2
+   appName: TrafficInfo
+ - task : CopyFiles@2
    displayName: CopyFiles
    inputs:
    SourceFolder: $(system.defaultworkingdirectory)
    Contents: '**'
-   TargetFolder: $(build.artifactstagingdirectory)
+    TargetFolder: $(build.artifactstagingdirectory)
 
-- task: PublishBuildArtifacts@1
+ - task: PublishBuildArtifacts@1
    displayName: Publish Artifact
    inputs:
      PathPublish: $(build.artifactstagingdirectory)
 
 - task: AzureWebApp@1
-  displayName: Azure Web App Deploy
-  inputs:
-  azureSubscription: $(serviceConnectionTpAzure)
-  appType: webAppLinux
-  appName: $(TrafficInfo)
-  package: $(build.artifactstagingdirectory)/**/*.war
-  
+    displayName: Azure Web App Deploy
+    inputs:
+     azureSubscription: $(serviceConnectionTpAzure)
+     appType: webAppLinux
+     appName: $(TrafficInfo)
+     package: $(build.artifactstagingdirectory)/**/*.war
+
 
  
  
